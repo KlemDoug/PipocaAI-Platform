@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![Pandas](https://img.shields.io/badge/Pandas-Data%20Analytics-150458?style=flat-square&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Architecture](https://img.shields.io/badge/Architecture-Modular%20(18%20Modules)-2EA44F?style=flat-square)]()
-[![License](https://img.shields.io/badge/License-Educational%20%2F%20SENAC%20RJ-004A8D?style=flat-square)]()
+[![License](https://img.shields.io/badge/License-Educacional%20%2F%20SENAC%20RJ-004A8D?style=flat-square)]()
 
 **Pipoca.AI** é uma aplicação modular em Python projetada para simular o ecossistema de autoatendimento, faturamento e telemetria de dados de uma plataforma digital de entretenimento. O sistema unifica assinaturas recorrentes (SaaS), transmissões ao vivo (*Pay-Per-View* com controle de capacidade de servidor), loja de ativos digitais e um pipeline analítico automatizado com exportação estruturada em CSV.
 
