@@ -1,38 +1,22 @@
-from banco_dados import banco_dados
-from modulos.f13_resumo_carrinho import exibir_resumo_pedido
+def exibir_resumo_pedido(banco_dados, id_pedido):
+    if id_pedido not in banco_dados["assinaturas_transacoes"]:
+        print("Pedido não encontrado.")
+        return
 
-# O banco veio com assinaturas_transacoes VAZIO.
-# Entao criamos 2 pedidos de teste, escritos a mao, para o F13 ter o que mostrar.
-banco_dados["assinaturas_transacoes"][2026001] = {
-    "email_usuario": "ana@email.com",
-    "nickname": "ana_pipoca",
-    "assinante_anual": True,
-    "carrinho": [
-        {"categoria": "STREAMING", "descricao": "Plano Sofa Compartilhado (4K + IA)", "qtd": 12, "subtotal": 560.0},
-        {"categoria": "LIVE_PPV", "descricao": "Final Mundial Valorant 2026 (POV Pro)", "qtd": 2, "subtotal": 79.8},
-    ],
-    "valor_bruto": 639.8,
-    "valor_desconto": 63.98,
-    "valor_liquido": 575.82,
-    "metodo_pagamento": "PIX",
-    "status": "PAGO",
-}
-banco_dados["assinaturas_transacoes"][2026002] = {
-    "email_usuario": "beto@email.com",
-    "nickname": "beto_cinema",
-    "assinante_anual": False,
-    "carrinho": [],
-    "valor_bruto": 0.0,
-    "valor_desconto": 0.0,
-    "valor_liquido": 0.0,
-    "metodo_pagamento": "PENDENTE",
-    "status": "ABERTO",
-}
+    p = banco_dados["assinaturas_transacoes"][id_pedido]
+    print("\n" + "=" * 50)
+    print(f"EXTRATO DO PEDIDO #{id_pedido} | {p['nickname']} ({p['email_usuario']})")
+    print(f"Status: {p['status']} | Pagamento: {p['metodo_pagamento']}")
+    print("=" * 50)
 
-# Mostra o extrato de TODOS os pedidos que existem
-for id_pedido in banco_dados["assinaturas_transacoes"]:
-    exibir_resumo_pedido(banco_dados, id_pedido)
-    print()
+    if not p["carrinho"]:
+        print("  Carrinho vazio.")
+    else:
+        for idx, item in enumerate(p["carrinho"], 1):
+            print(f"  {idx}. [{item['categoria']}] {item['descricao']} (x{item['qtd']}) -> R$ {item['subtotal']:.2f}")
 
-# Pedido que NAO existe
-exibir_resumo_pedido(banco_dados, 9999999)
+    print("-" * 50)
+    print(f"Valor Bruto:   R$ {p['valor_bruto']:.2f}")
+    print(f"Desconto:      R$ {p['valor_desconto']:.2f}")
+    print(f"Valor Líquido: R$ {p['valor_liquido']:.2f}")
+    print("=" * 50)

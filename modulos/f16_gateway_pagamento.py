@@ -1,7 +1,3 @@
-from banco_dados import banco_dados
-
-
-
 # F16 — Gateway de Pagamento Digital (Função Completa)
 # * **Arquivo:** `modulos/f16_gateway_pagamento.py`
 # * **Assinatura:** `def finalizar_checkout_digital(banco_dados, id_pedido, opcao_pagamento):`
@@ -18,32 +14,29 @@ from banco_dados import banco_dados
 #   4. Some o `"valor_liquido"` do pedido em `banco_dados["faturamento_total"]` e retorne `True`.
 
 
-
 def finalizar_checkout_digital(banco_dados, id_pedido, opcao_pagamento):
-    pedidos = banco_dados["pedidos"]
+    pedidos = banco_dados.get("assinaturas_transacoes", {})
 
     if id_pedido not in pedidos:
         return False
-    
-    pedidos = pedidos[id_pedido]
 
-    if pedidos["status"] != "ABERTO":
+    pedido = pedidos[id_pedido]
+
+    if pedido["status"] != "ABERTO" or len(pedido["carrinho"]) == 0:
         return False
-    
-    if len(pedidos["carrinho"]) == 0:
-        return False
-    
-#definição do metoo de pagamento
-    
+
     if opcao_pagamento == 1:
-        metodo_de_pagamento = "PIX"
-    elif opcao_pagamento == 2 :
-        metodo_de_pagamento = "CARTAO_VIRTUAL"
+        pedido["metodo_pagamento"] = "PIX"
+    elif opcao_pagamento == 2:
+        pedido["metodo_pagamento"] = "CARTAO_VIRTUAL"
     elif opcao_pagamento == 3:
-        metodo_de_pagamento = "CRIPTO_REAL"
+        pedido["metodo_pagamento"] = "CRIPTO_REAL"
     else:
         return False
 
+    pedido["status"] = "PAGO"
+    banco_dados["faturamento_total"] = round(
+        banco_dados["faturamento_total"] + pedido["valor_liquido"], 2
+    )
 
-
-
+    return True
