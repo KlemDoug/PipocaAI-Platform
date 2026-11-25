@@ -16,7 +16,7 @@
 ## Tabela Oficial de Distribuição (Módulos F01 a F18)
 
 | ID | Arquivo (`modulos/`) | Função (`def`) | Porte | Aluno(a) Responsável | Branch | Status PR / Merge |
-| :-: | :--- | :--- | :-: | :--- | :--- | :--- | :-: |
+| :-: | :--- | :--- | :-: | :--- | :--- | :--- |
 | **F01** | `f01_login_usuario.py` | `autenticar_usuario()` | Curta | *Rafael* | `feature-f01-` |
 | **F02** | `f02_menu_chatbot.py` | `exibir_menu_chatbot()` | Curta | *Rafael* | `feature-f02-` |
 | **F03** | `f03_abrir_pedido.py` | `abrir_carrinho_digital()` | Curta | *Kaike* | `feature-f03-` |
